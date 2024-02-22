@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-scale '/home/bankai/stuff/wallpapers/samurai2.jpg'
