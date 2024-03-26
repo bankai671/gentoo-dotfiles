@@ -74,8 +74,7 @@ inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 inoremap <expr> <Down> coc#pum#visible() ? coc#pum#next(1) : "\<Down>"
 inoremap <expr> <Up> coc#pum#visible() ? coc#pum#prev(1) : "\<Up>"
 
-nnoremap <C-t> <Esc>:NERDTreeToggle<CR>
-inoremap <C-t> <Esc>:NERDTreeToggle<CR>
+nnoremap <C-t> <Esc>:NERDTreeToggle<CR><C-w>=
 
 " NERDTree
 let g:NERDTreeWinSize = 40
@@ -90,3 +89,15 @@ colorscheme gruvbox
 " multi cursor
 let g:VM_mouse_mappings = 1
 
+" terminal
+lua require("toggleterm").setup()
+
+" set
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><c-j> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+" By applying the mappings this way you can pass a count to your
+" mapping to open a specific window.
+" For example: 2<C-t> will open terminal 2
+ nnoremap <silent><c-j> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+ inoremap <silent><c-j> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
