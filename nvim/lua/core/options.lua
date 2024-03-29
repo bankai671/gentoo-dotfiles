@@ -11,12 +11,13 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.encoding = "utf-8"
 vim.opt.background = "dark"
+vim.opt.clipboard:append 'unnamedplus'
+vim.opt.background = 'dark'
 
 vim.cmd [[
     syntax on
     filetype indent on
     set nocompatible
-    set clipboard^=unnamed,unnamedplus
     set number
     set nobackup
     set noswapfile
@@ -27,3 +28,4 @@ vim.cmd [[
     aunmenu PopUp.How-to\ disable\ mouse
     aunmenu PopUp.-1-
 ]]
+
