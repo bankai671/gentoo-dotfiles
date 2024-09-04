@@ -1,69 +1,107 @@
+call plug#begin()
+
+Plug 'scrooloose/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
+Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'https://github.com/jiangmiao/auto-pairs'
+Plug 'https://github.com/ap/vim-css-color'
+
+call plug#end()
+
 syntax on
 filetype on
 filetype indent on
-set cindent
-set nocompatible
+set wildmenu
+set mouse=a
+set ttymouse=sgr
+set termguicolors
 set number
 set shiftwidth=4
 set tabstop=4
 set nobackup
-set wildmenu
-set mouse=a
-set clipboard^=unnamed,unnamedplus
-set nobackup
-set background=dark
+set noswapfile
 set hlsearch
 set incsearch
-set encoding=utf8
+set clipboard^=unnamed,unnamedplus
+set backspace=indent,eol,start
+set encoding=utf-8
+set background=dark
+set nocompatible
+set nowrap
+set updatetime=300
+colorscheme habamax
 
-nnoremap <C-t> <Esc>:NERDTreeToggle<CR>
-inoremap <C-t> <Esc>:NERDTreeToggle<CR>
+let mapleader = ' '
+let NERDTreeShowHidden=1
+let NERDTreeMinimalUI=1
 
-let g:NERDTreeWinSize = 50
+noremap <leader>e :NERDTreeToggle<CR>
 
-call plug#begin()
+" Use fzf to open files
+nnoremap <leader>f :Files<CR>
 
-Plug 'sheerun/vim-polyglot'
-Plug 'preservim/nerdtree'
-Plug 'philrunninger/nerdtree-visual-selection'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'morhetz/gruvbox'
-Plug 'ryanoasis/vim-devicons'
-Plug 'jiangmiao/auto-pairs'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ekalinin/dockerfile.vim'
-Plug 'w0rp/ale'
+" Use fzf to search for text in files
+nnoremap <leader>g :Rg<CR>
 
-call plug#end()
+vmap <Tab> >gv
+vmap <S-Tab> <gv
 
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+" Move current line down in normal mode
+nnoremap <A-j> :m .+1<CR>==
 
-let g:webdevicons_enable_nerdtree = 1
+" Move current line up in normal mode
+nnoremap <A-k> :m .-2<CR>==
 
-"inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-"inoremap <silent><expr> <cr> coc#pum#visible() && coc#pum#info()['index'] != -1 ? coc#pum#confirm() : "\<C-g>u\<CR>"
+" Move current line down with arrow key in normal mode
+nnoremap <A-Down> :m .+1<CR>==
 
-" use <tab> to trigger completion and navigate to the next complete item
+" Move current line up with arrow key in normal mode
+nnoremap <A-Up> :m .-2<CR>==
+
+" Move selected lines down in visual mode
+vnoremap <A-j> :m '>+1<CR>gv=gv
+
+" Move selected lines up in visual mode
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Move selected lines down with arrow key in visual mode
+vnoremap <A-Down> :m '>+1<CR>gv=gv
+
+" Move selected lines up with arrow key in visual mode
+vnoremap <A-Up> :m '<-2<CR>gv=gv
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
+
+
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+	  \ coc#refresh()
+      "\ "\<Tab>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr> <Down> coc#pum#visible() ? coc#pum#next(1) : "\<Down>"
+inoremap <expr> <Up> coc#pum#visible() ? coc#pum#prev(1) : "\<Up>"
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-
-" use <c-space> for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-" Use <C-@> on vim
-inoremap <silent><expr> <c-@> coc#refresh()
-
-inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
-inoremap <expr> <Down> coc#pum#visible() ? coc#pum#next(1) : "\<Down>"
-inoremap <expr> <Up> coc#pum#visible() ? coc#pum#prev(1) : "\<Up>"
+" highlight VertSplit guibg = #1c1c1c
 
