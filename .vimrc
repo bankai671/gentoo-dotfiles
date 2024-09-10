@@ -148,6 +148,8 @@ augroup FileTypeTabs
 	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
 	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType css setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType html setlocal tabstop=2 shiftwidth=2 expandtab
 augroup END 
 
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
