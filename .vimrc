@@ -1,14 +1,22 @@
 call plug#begin()
 
 Plug 'scrooloose/nerdtree'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
+
 Plug 'sheerun/vim-polyglot'
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'https://github.com/jiangmiao/auto-pairs'
+
 Plug 'https://github.com/ap/vim-css-color'
+
 Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+Plug 'https://github.com/airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -90,14 +98,16 @@ endif
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
-	  \ coc#refresh()
-      "\ "\<Tab>"
+	  \ "\<Tab>"
+	  "\ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <expr> <Down> coc#pum#visible() ? coc#pum#next(1) : "\<Down>"
 inoremap <expr> <Up> coc#pum#visible() ? coc#pum#prev(1) : "\<Up>"
 
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+inoremap <silent><expr> <Esc> coc#pum#visible() ? coc#pum#cancel() : "\<Esc>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -130,4 +140,17 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+nnoremap <Leader>t :belowright terminal<CR>
+
+augroup FileTypeTabs
+	autocmd FileType typescriptreact setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType json setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 expandtab
+	autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 expandtab
+augroup END 
+
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
