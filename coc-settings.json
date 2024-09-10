@@ -1,0 +1,7 @@
+{
+  "suggest.autoTrigger": "none",
+  "suggest.enablePreselect": false,
+  "suggest.noselect": true,
+  "inlayHint.enable": false,
+  "snippets.ultisnips.pythonPrompt": false
+}
