@@ -18,6 +18,8 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 Plug 'https://github.com/airblade/vim-gitgutter'
 
+Plug 'https://github.com/preservim/tagbar'
+
 call plug#end()
 
 syntax on
@@ -127,6 +129,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap <leader>do <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
+
 " Use K to show documentation in preview window
 nnoremap <silent> K :call ShowDocumentation()<CR>
 
@@ -155,4 +160,6 @@ augroup END
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
+nnoremap <RightMouse> :tabclose<CR>
 

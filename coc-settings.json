@@ -3,5 +3,7 @@
   "suggest.enablePreselect": false,
   "suggest.noselect": true,
   "inlayHint.enable": false,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "coc.preferences.bracketEnterImprove": true,
+  "coc.preferences.jumpCommand": "tab drop"
 }
