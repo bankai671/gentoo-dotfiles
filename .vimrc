@@ -17,8 +17,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --producti
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 Plug 'https://github.com/airblade/vim-gitgutter'
-
-Plug 'https://github.com/preservim/tagbar'
+Plug 'https://github.com/tpope/vim-fugitive'
 
 call plug#end()
 
@@ -100,8 +99,8 @@ endif
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
-	  \ "\<Tab>"
-	  "\ coc#refresh()
+	  \ coc#refresh()
+	  "\ "\<Tab>"
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <expr> <Down> coc#pum#visible() ? coc#pum#next(1) : "\<Down>"
 inoremap <expr> <Up> coc#pum#visible() ? coc#pum#prev(1) : "\<Up>"
@@ -162,4 +161,9 @@ highlight GitGutterChange guifg=#bbbb00 ctermfg=3
 highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
 nnoremap <RightMouse> :tabclose<CR>
+
+let g:coc_enable_locationlist = 0
+autocmd User CocLocationsChange CocList --first --normal location
+
+noremap <C-LeftMouse> <Plug>(coc-definition)
 
