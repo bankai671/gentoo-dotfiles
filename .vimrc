@@ -167,3 +167,5 @@ autocmd User CocLocationsChange CocList --first --normal location
 
 noremap <C-LeftMouse> <Plug>(coc-definition)
 
+autocmd FileType c let b:coc_clangd_args = ['--compile-commands-dir=.', '-std=c11', '-xc']
+autocmd FileType cpp let b:coc_clangd_args = ['--compile-commands-dir=.', '-std=c++17', '-xc++']

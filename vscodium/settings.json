@@ -1,0 +1,29 @@
+{
+  "git.openRepositoryInParentFolders": "never",
+  "editor.mouseWheelZoom": true,
+  "editor.minimap.enabled": false,
+  "explorer.confirmDelete": false,
+  "explorer.compactFolders": false,
+  "editor.tabSize": 2,
+  "prettier.tabWidth": 2,
+  "editor.stickyScroll.enabled": false,
+  "editor.renderWhitespace": "all",
+  "editor.insertSpaces": true,
+  "cssModules.camelCase": false,
+  "typescript.suggest.paths": false,
+  "javascript.suggest.paths": false,
+  "prettier.requireConfig": false,
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "prettier.vueIndentScriptAndStyle": true,
+  "prettier.trailingComma": "all",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.format.enable": true,
+  "window.menuBarVisibility": "hidden",
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  }
+}
